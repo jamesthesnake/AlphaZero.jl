@@ -39,10 +39,14 @@
 ## Coding Style
 
 - This codebase enforces the [Blue Style](https://github.com/invenia/BlueStyle).
-- Each source file defines a submodule. The files hierarchy perfectly reflects the underlying module hierarchy.
+- Each source file defines a submodule with the same name. The files hierarchy perfectly reflects the underlying module hierarchy.
+- All leaf module names must be unique. In particular, this makes it easier to open files in editors such as VSCode without running into ambiguities.
+- The tests for a leaf module with name `Module` is in `Tests/ModuleTests`. Note that the `Tests` directory has a flat structure. It also contains a `Common` submodule with definitions that are common to several test modules.
 - The imports in each submodule are split in two parts: the external package imports first and then the internal submodule imports.
 - We use the `Reexport` package so as to ease working with module hierarchies.
 - We should make sure that the codebase can be explored using the "Jump to definition" feature of VS-Code.
+- **Unresolved:** It is still in debate whether type annotations should be used liberally or
+  inly for the purpose of dispatch.
 
 ## Testing
 
@@ -92,9 +96,10 @@ By executing code directly in the editor window, the whole stack trace gets high
 
 ## Useful Links
 
+- [Fabrice Rosay's AlphaGPU](https://github.com/fabricerosay/AlphaGPU)
 - [MuZero Pseudocode](https://arxiv.org/src/1911.08265v2/anc/pseudocode.py)
 - [Michal Lukomski's GSOC Project](https://github.com/michelangelo21/MuZero)
 - [Werner Duvaud's implementation](https://github.com/werner-duvaud/muzero-general)
 - [Duvaud's Tictactoe Params](https://github.com/werner-duvaud/muzero-general/blob/master/games/tictactoe.py)
 
-Note that in the MuZero pseudocode, they seem to be updating the network every 1000 batch updates (batches have size 2048). There is 1e6 updates in total so 1000 iterations. Buffer with 1e6 samples (Renewed twice during iteration?). This is surprisingly small...
+Note that in the MuZero pseudocode, they seem to be updating the network every 1000 batch updates (batches have size 2048). There are 1e6 updates in total so this makes 1000 iterations. The buffer is surprisingly small with 1e6 samples.

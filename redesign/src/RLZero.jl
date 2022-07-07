@@ -8,12 +8,16 @@ include("Util/Util.jl")
 include("BatchedEnvs.jl")
 using .BatchedEnvs
 
-include("MCTS.jl")
-@reexport using .MCTS
+include("SimpleMcts.jl")
+@reexport using .SimpleMcts
 
-include("BatchedMCTS.jl")
+include("BatchedMcts.jl")
+@reexport using .BatchedMcts: BatchedMcts
+
+include("BatchedMctsAos.jl")
+@reexport using .BatchedMctsAos: BatchedMctsAos
 
 include("Tests/Tests.jl")
-using .Tests
+@reexport using .Tests: Tests
 
 end
